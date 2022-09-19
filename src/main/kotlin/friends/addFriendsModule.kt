@@ -1,16 +1,11 @@
 package friends
 
-import io.javalin.Javalin
+import saveFile
 
-fun Javalin.addFriendsModule() {
+fun addFriendsModule() {
     val friends = listOf("Joseph", "Nicholas", "Caesar")
-    get("/") { ctx ->
-        ctx.html(htmlFriendsIndex(friends))
-    }
-    friends.forEach { friend ->
-        get("/$friend") { ctx ->
-            val characteristic = listOf("swimmer", "runner", "debater").random()
-            ctx.html(htmlFriendProfile(friend, characteristic))
-        }
+    saveFile(htmlFriendsIndex(friends), "output/", "index.html")
+    friends.zip(listOf("swimmer", "runner", "debater")).forEach { (friend, characteristic) ->
+        saveFile(htmlFriendProfile(friend, characteristic), "output/", "$friend.html")
     }
 }
