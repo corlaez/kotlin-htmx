@@ -8,8 +8,8 @@ import kotlinx.html.*
 import kotlinx.html.stream.createHTML
 
 fun htmlFriendsIndex(friends: List<String>): String {
-    return htmlBaseTemplate {
-        h1 { a { href = "/"; +"My Friends" } }
+    return htmlBaseTemplate { /* inside the block `this` is a BODY HTML instance */
+        h1 { a { href = "/"; +"My Friends" } }// nested `a` inside a `h1`. To insert a text inside any tag we use the + operator
         friends.forEach { friend ->
             h2 {
                 a {
